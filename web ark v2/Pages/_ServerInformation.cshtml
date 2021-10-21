@@ -17,39 +17,53 @@
 @foreach(ServerApi server in servers)
 {
     <div class="iplist">
-        <b style="text-align: center; width: 100%; float: left; ">@server.Name</b>
-        <br>Карта:
-        <span style="color: white; float: right;">
-            @server.Map
-        </span>
-        <br>Адрес:
-        <a href="steam://connect/@server.RemoteIP:@server.RemotePort" style="color: white; float: right;">
-            @server.RemoteIP:@server.RemotePort
-        </a>
-        <br>Текущая версия:
-        <b style="color: red; float: right; ">
-            @server.Version
-        </b>
-        <br>Статус сервера:
+        
         @if (server.Id > 0)
         {
-            <font style='color: greenyellow;float: right;'>Работает</font>
+            @Html.Raw("<b style=\"text-align: center; width: 100%; float: left; \">");
+            @server.Name
+            @Html.Raw("</b>");
+            @Html.Raw("<br>Карта:");
+            @Html.Raw("<span style=\"color: white; float: right;\">");
+            @server.Map
+            @Html.Raw("</span>");
+            @Html.Raw("<br>Адрес:");
+            @Html.Raw("<@Html.Raw(\"a href=\"steam://connect/");
+                @server.RemoteIP
+            @Html.Raw(":");
+                @server.RemotePort 
+            @Html.Raw("style=\"color: white; float: right;\">");
+                @server.RemoteIP
+            @Html.Raw(":");
+                @server.RemotePort
+            @Html.Raw("</a>");
+            @Html.Raw("<br>Текущая версия:");
+            @Html.Raw("<b style=\"color: red; float: right; \">");
+                @server.Version
+            @Html.Raw("</b>");
+            @Html.Raw("<br>Статус сервера:");
+            @Html.Raw("<font style='color: greenyellow;float: right;'>Работает</font>");
+           
+            @if (server.Players.FirstOrDefault().Id == "0")//Если ошибка или нет игроков то прилетает всегда 1 игрок с ид <=0
+            {
+                @Html.Raw("<br>Список игроков(0): <br>Нет игроков")
+            }
+            else
+            {
+                 @Html.Raw("<br>Активных игроков:<b style=\"float: right;color: greenyellow;\">" + @server.Players.Count + "</b> <br>")
+                 foreach (var player in @server.Players)
+                        {
+                            @Html.Raw("\"" + player.User + "\" ")
+                        }
+            }
         }
-         else {
-            <font style='color: red;float: right;'>Недоступен</font>
-        }
-        @if (server.Players.FirstOrDefault().Id == "0")//Если ошибка или нет игроков то прилетает всегда 1 игрок с ид <=0
+        else 
         {
-            @Html.Raw("<br>Список игроков(0): <br>Нет игроков")
-    }
-        else
-        {
-             @Html.Raw("<br>Активных игроков:<b style=\"float: right;color: greenyellow;\">" + @server.Players.Count + "</b> <br>")
-             foreach (var player in @server.Players)
-                    {
-                        @Html.Raw("\"" + player.User + "\" ")
-                    }
+            @Html.Raw("<b style=\"text-align: center; width: 100%; float: left; \">Мониторинг серверов недоступен</b>");
+            @Html.Raw("<br>Статус сервера:");
+            @Html.Raw("<font style='color: red;float: right;'>Недоступен</font>");
         }
+        
 
     </div>
 }
