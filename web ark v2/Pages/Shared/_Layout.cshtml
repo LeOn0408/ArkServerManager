@@ -1,0 +1,89 @@
+﻿
+@{
+    string username = User.Identity.Name;
+}
+@functions 
+{
+    
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <title>@ViewData["Title"] - ARK: Survival Evolved</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type='text/javascript' src='/js/bootstrap.js'></script>
+    <script type='text/javascript' src='//arkservera.com/web/api/448/'></script>
+    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>
+</head>
+<body>
+    <header>
+
+
+        <img src="/images/logo.png" alt="ark" width="70" height="70">
+        <nav>
+            <a href="../" style="color: #ffffff; font-size: 100%; margin-top:10px;padding:10px; text-shadow: 1px 3px 3px black, 0 0 1em #44414d;">НОВОСТИ</a>
+            <a href="https://ark-ru.gamepedia.com/ARK_Survival_Evolved_Wiki" style="color: #ffffff; font-size: 100%; margin-top:10px;padding:10px; text-shadow: 1px 3px 3px black, 0 0 1em #44414d;">WIKI</a>
+            <a href="../Account" style="color: #ffffff; font-size: 100%; margin-top: 10px; padding: 10px; text-shadow: 1px 3px 3px black, 0 0 1em #44414d; text-transform: uppercase;">
+                ПРОФИЛЬ
+            </a>
+            @*<a href="../shop" style="color: #ffffff; font-size: 100%; margin-top: 10px; padding: 10px; text-shadow: 1px 3px 3px black, 0 0 1em #44414d; text-transform: uppercase;">
+                МАГАЗИН
+            </a>*@
+        </nav>
+    </header>
+    <div class="namepage ">@ViewData["Title"]</div>
+    <article>
+        @RenderBody()
+    </article>
+
+    <aside>
+
+        @*<iframe src="//arkservera.com/web/block/448/?style=1" frameborder="0" width="250" height="200" scrolling="no"></iframe>*@
+
+
+        @if (@username != null)
+        {
+            <component type="typeof(Components.Account.Player)" render-mode="ServerPrerendered" />
+            <script src="_framework/blazor.server.js"></script>
+        }
+
+        
+            @await Html.PartialAsync("_ServerInformation")
+         
+
+       
+
+        <div class="roadmap">
+            Планы по развитию:
+            <ul>
+                <li>Осень 2021 - Запуск сервера(TheCenter) </li>
+                <li>Осень 2021 - Новый сайт </li>
+                <li>III квартал 2022 - Открытое кроссплатформенное ПО для управления серверами</li>
+            </ul>
+        </div>
+        @*<div class="yandex">
+            <a href="https://yoomoney.ru/to/41001670510814" style="color:white; text-align:center;">На оперативную память</a>
+            <!--<iframe src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0.%20%D0%9D%D0%B0%20%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D1%83%D1%8E%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C&targets-hint=&default-sum=&button-text=14&hint=&successURL=&quickpay=shop&account=41001670510814"
+        width="235px" height="280px" frameborder="0" allowtransparency="true" scrolling="no" background="#44414d"></iframe>*/-->
+        </div>*@
+        @*<div class="issues">
+
+            <a href="../issues" style="color: #ffffff">Сообщить о проблеме</a>
+        </div>*@
+
+    </aside>
+
+    <footer>
+        <div>
+            Разработано <a href="http://aparshukov.ru" style="color: yellowgreen;">aparshukov</a> 2020-2021
+        </div>
+    </footer>
+
+
+</body>
+</html>

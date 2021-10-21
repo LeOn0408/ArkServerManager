@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Identity;
+
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@inject NavigationManager NavigationManager
+@inject UserManager<ArkUsers> _userManager
+@inject IDbContextFactory<ApplicationContext> DbFactory
+
+
+<div class="iplist">
+    <a href="../account" style="color: #ffffff; text-decoration: none;">
+        @username
+    </a>
+    <a href="../account/login?handler=ByLogout" value="Logout" style="float: right; color: #ffffff;">Выйти</a>
+
+    <br>Баланс: <span style="float:right">@balance ARC</span>
+    <br> Игровой аккаунт:
+    <!-- Button trigger modal -->
+
+   
+
+</div>
+
+
+@code {
+    public string balance, username;
+    //public List<ArkPlayers> player { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        using var context = DbFactory.CreateDbContext();
+        username = user.Identity.Name;
+
+        var player = await context.Ark_players.AsNoTracking().Where(x => x.User == user.Identity.Name).ToListAsync();
+        foreach (var getInfo in player)
+        {
+            balance = getInfo.ARKCoin.ToString();
+
+        }
+
+
+
+    }
+}

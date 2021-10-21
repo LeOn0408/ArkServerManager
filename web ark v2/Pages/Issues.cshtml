@@ -1,0 +1,34 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IssuesModel
+@{
+    ViewData["Title"] = "Обратная связь";
+}
+<h1>@ViewData["Title"]</h1>
+<div style="background: rgba(0,0,0, 0.5);">
+    <p>В разработке</p>
+    <form method="post">
+        <label><strong>Выберите где возникла проблема</strong> </label>><br />
+        <select name="select">
+            <option>Сайт</option>
+            <option>Игра</option>
+        </select><br>
+        <label for="name">Имя</label><br />
+        <input type="text" name="name" id="name" /><br /><br />
+        <label for="age">Проблема</label><br />
+        <textarea type="text" name="problem" id="problem"></textarea> <br /><br />
+        <input type="submit" value="Оправить" />
+    </form>
+
+    <h2>@Model.Message</h2>
+
+    <component type="typeof(Components.App)" render-mode="ServerPrerendered" />
+
+    
+
+
+</div>
+
+
+
+
