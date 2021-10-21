@@ -47,7 +47,6 @@ namespace ARKServerManager.Controllers
             else
             {
                 serverInfo.Id = -1;
-                serverInfo.Name = "Error";
             }
                 
             return serverInfo;

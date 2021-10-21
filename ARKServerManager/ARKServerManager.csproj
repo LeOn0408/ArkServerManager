@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <DebugType>embedded</DebugType>
+    <DebugType>portable</DebugType>
     <SignAssembly>False</SignAssembly>
     <Copyright>Aleksandr Parshukov</Copyright>
     <PackageProjectUrl>ark.aparshukov.ru</PackageProjectUrl>

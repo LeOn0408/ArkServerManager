@@ -17,5 +17,9 @@ namespace ARKServerManager.Database
 
             optionsBuilder.UseSqlite(connection);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Server>().Property(x => x.Visible).HasDefaultValue(0);//по умолчанию скрыть
+        }
     }
 }
