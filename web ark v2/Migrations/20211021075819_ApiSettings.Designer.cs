@@ -3,14 +3,16 @@ using System;
 using ArkWeb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArkWeb.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211021075819_ApiSettings")]
+    partial class ApiSettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,14 +167,6 @@ namespace ArkWeb.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("APISetting");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            ApiHost = 0,
-                            ApiName = "OnlinePlayer"
-                        });
                 });
 
             modelBuilder.Entity("ArkWeb.Models.Database.ArkJobs", b =>

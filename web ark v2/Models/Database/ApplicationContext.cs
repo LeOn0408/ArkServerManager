@@ -10,7 +10,8 @@ namespace ArkWeb
         public DbSet<ArkOAuth> OAuth { get; set; }
         public DbSet<ArkPlayers> Ark_players { get; set; }
         public DbSet<ArkJobs> Ark_Jobs { get; set; }
-        
+        public DbSet<APISetting> APISetting { get; set; }
+
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
@@ -22,6 +23,7 @@ namespace ArkWeb
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<APISetting>().HasData(new APISetting { ID = 1, ApiName = "OnlinePlayer"});
         }
 
     }

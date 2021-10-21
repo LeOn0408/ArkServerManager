@@ -43,17 +43,13 @@
 
     <aside>
 
-        @*<iframe src="//arkservera.com/web/block/448/?style=1" frameborder="0" width="250" height="200" scrolling="no"></iframe>*@
-
-
         @if (@username != null)
         {
             <component type="typeof(Components.Account.Player)" render-mode="ServerPrerendered" />
             <script src="_framework/blazor.server.js"></script>
         }
 
-        
-            @await Html.PartialAsync("_ServerInformation")
+        @await Html.PartialAsync("_ServerInformation")
          
 
        
