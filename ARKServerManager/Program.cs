@@ -6,12 +6,7 @@ namespace ARKServerManager
     {
         public static void Main(string[] args)
         {
-            Statistics statistics= new();
-            Task task= new(()=>statistics.StartStatistics());
-            task.Start();
-
             CreateHostBuilder(args).Build().Run();
-
         }
 
 

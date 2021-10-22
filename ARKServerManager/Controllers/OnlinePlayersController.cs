@@ -10,12 +10,11 @@ namespace ARKServerManager.Controllers
     public class OnlinePlayersController : ControllerBase
     {
         DatabaseContext Db {  get; set; }
-        ILogger<OnlinePlayersController> Logger {  get; set; }   
+        
 
-        public OnlinePlayersController(DatabaseContext database, ILogger<OnlinePlayersController> logger)
+        public OnlinePlayersController(DatabaseContext database)
         {
             Db = database;
-            Logger = logger;
         }
 
         //
@@ -26,8 +25,8 @@ namespace ARKServerManager.Controllers
             //Logger.LogInformation("Получаем данные");
             List<Server> serversList = Db.Server.AsNoTracking().ToList();
             List<ServerApi> servers = new();
-            
-           
+
+
 
             foreach (Server server in serversList)
             {
