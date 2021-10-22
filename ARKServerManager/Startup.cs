@@ -23,14 +23,29 @@ namespace ARKServerManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddLogging(
+            builder =>
+            {
+                builder.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.Warning)
+                       .AddFilter("System", LogLevel.Warning)
+                       .AddFilter("NToastNotify", LogLevel.Warning)
+                       .AddConsole();
+            });
+
             string TypeDB = "MySQL";
             if (TypeDB == "MySQL")
             {
-                IConfigurationSection connStrings = Configuration.GetSection("ConnectionStrings");
-                string connection = connStrings.GetSection("MySQLConnection").Value;
+                string connection = Configuration.GetConnectionString("MySQLConnection");
                 ServerVersion vesrion = ServerVersion.AutoDetect(connection);
                 services.AddDbContext<DatabaseContext>(options =>
-                    options.UseMySql(connection, vesrion));
+                    options.UseMySql(connection, vesrion,
+                    mySqlOptions =>
+                    {
+                        mySqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 1,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorNumbersToAdd: null);
+                    }));
                 
             }
             else
@@ -50,10 +65,10 @@ namespace ARKServerManager
             db.Database.EnsureCreated();
             db.Database.Migrate();
             
-            if (env.IsDevelopment())
-            {
-                _ = app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    _ = app.UseDeveloperExceptionPage();
+            //}
             app.UseRouting();
             app.UseEndpoints(endpoints =>endpoints.MapControllers());
 

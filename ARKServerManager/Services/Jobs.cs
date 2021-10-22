@@ -21,6 +21,7 @@ namespace ARKServerManager.ServerService
         }
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Background tasks started");
             ActiveTask = new Dictionary<int, ServerTask>();
             timer = new(GetJobs,null,0,60000);
             return Task.CompletedTask;
@@ -51,7 +52,6 @@ namespace ARKServerManager.ServerService
             {
 
             }
-
             Statistics statistics = new(scopeFactory);
             statistics.StartStatistics();
         }
@@ -65,7 +65,7 @@ namespace ARKServerManager.ServerService
             {
                 Thread.Sleep(timeToJob);
             }
-            logger.LogInformation("Backup started");
+            logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Backup started");
             ServerTask edit = Db.Jobs.FirstOrDefault(x => x.Id == c.Id);
             edit.DateJob = c.DateJob.AddDays(1);
             Db.SaveChanges();
@@ -74,11 +74,11 @@ namespace ARKServerManager.ServerService
             {
                 BackupSave backupSave = new();
                 backupSave.Backup(Db, edit.ServerId);
-                logger.LogInformation("Backup completed");
+                logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Backup completed");
             }
             catch(Exception ex)
             {
-                logger.LogError(ex.Message);
+                logger.LogError($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} {ex.Message}");
             }
             
         }
