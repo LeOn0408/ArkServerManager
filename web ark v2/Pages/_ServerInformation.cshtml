@@ -28,11 +28,12 @@
             @server.Map
             @Html.Raw("</span>");
             @Html.Raw("<br>Адрес:");
-            @Html.Raw("<@Html.Raw(\"a href=\"steam://connect/");
+            @*<a href="steam://connect/@server.RemoteIP:@server.RemotePort" style="color: white; float: right;">*@
+            @Html.Raw("<a href=\"steam://connect/");
                 @server.RemoteIP
             @Html.Raw(":");
                 @server.RemotePort 
-            @Html.Raw("style=\"color: white; float: right;\">");
+            @Html.Raw("\" style=\"color: white; float: right;\">");
                 @server.RemoteIP
             @Html.Raw(":");
                 @server.RemotePort

@@ -38,7 +38,7 @@ namespace ARKServerManager.ServerService
                     {
                         continue;
                     }
-                    PlayerStatistics ps = Db.Statistics.FirstOrDefault(x=>x.PlayerId==player.Id);
+                    PlayerStatistics ps = Db.Statistics.FirstOrDefault(x => x.PlayerId == player.Id && x.ServerId == server.Id);
                     if (ps == null)
                     {
                         ps = new PlayerStatistics
