@@ -100,13 +100,13 @@ aside {
     background: #44414d;
     margin:2%;
 }
-.loginpage {
+.loginpage, .feedbackpage {
     background: #44414d;
     width: 94%;
     float: left;
     overflow: hidden;
 }
-.loginform {
+.loginform, .feedbackform {
     text-align: center;
     margin: 5%;
 }

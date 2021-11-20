@@ -17,12 +17,16 @@
   <ItemGroup>
     <Compile Remove="Databases\**" />
     <Compile Remove="Models\Authorization\**" />
+    <Compile Remove="Pages\ArkServer\**" />
     <Content Remove="Databases\**" />
     <Content Remove="Models\Authorization\**" />
+    <Content Remove="Pages\ArkServer\**" />
     <EmbeddedResource Remove="Databases\**" />
     <EmbeddedResource Remove="Models\Authorization\**" />
+    <EmbeddedResource Remove="Pages\ArkServer\**" />
     <None Remove="Databases\**" />
     <None Remove="Models\Authorization\**" />
+    <None Remove="Pages\ArkServer\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,7 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\ArkServer\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

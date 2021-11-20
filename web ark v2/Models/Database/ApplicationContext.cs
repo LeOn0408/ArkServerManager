@@ -11,6 +11,9 @@ namespace ArkWeb
         public DbSet<ArkPlayers> Ark_players { get; set; }
         public DbSet<ArkJobs> Ark_Jobs { get; set; }
         public DbSet<APISetting> APISetting { get; set; }
+        public DbSet<ArkFeedbackType> ArkFeedbackTypes { get; set; }
+        public DbSet<ArkFeedback> ArkFeedback { get; set; }
+
 
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)

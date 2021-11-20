@@ -34,7 +34,8 @@ namespace ArkWeb
                         errorNumbersToAdd: null);
                     }
                 ));
-
+            services.AddIdentity<ArkUsers, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
