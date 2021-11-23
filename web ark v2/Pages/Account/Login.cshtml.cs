@@ -13,15 +13,12 @@ namespace ArkWeb.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly UserManager<ArkUsers> _userManager;
         private readonly SignInManager<ArkUsers> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<ArkUsers> signInManager,
-            ILogger<LoginModel> logger,
-            UserManager<ArkUsers> userManager)
+            ILogger<LoginModel> logger)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -84,7 +81,7 @@ namespace ArkWeb.Pages.Account
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {

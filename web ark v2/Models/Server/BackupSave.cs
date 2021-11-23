@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO.Compression;
-using Quartz.Impl;
-using Quartz;
 using System.IO;
 using Microsoft.Extensions.Logging;
 

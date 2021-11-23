@@ -42,7 +42,7 @@ namespace ArkWeb.Pages
         [BindProperty]
         public List<SelectListItem> FeedbackTypeList { get; set; } = new();
 
-        private List<ArkFeedbackType> _feedbackTypes;
+        private readonly List<ArkFeedbackType> _feedbackTypes;
 
         public FeedbackModel(ILogger<FeedbackModel> logger, ApplicationContext db)
         {
@@ -51,15 +51,6 @@ namespace ArkWeb.Pages
             _feedbackTypes = _db.ArkFeedbackTypes.ToList();
 
         }
-
-        //public IActionResult Index()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        return Content(User.Identity.Name);
-        //    }
-        //    return Content("не аутентифицирован");
-        //}
 
         public void OnGet()
         {

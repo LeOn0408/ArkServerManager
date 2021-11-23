@@ -10,14 +10,13 @@
     }
     catch
     {
-        servers = new() { new ServerApi { Id = -1, Name = "Информация не доступна" } };
+        servers = new() { new ServerApi { Id = -1} };
     }
     
 }
 @foreach(ServerApi server in servers)
 {
     <div class="iplist">
-        
         @if (server.Id > 0)
         {
             @Html.Raw("<b style=\"text-align: center; width: 100%; float: left; \">");

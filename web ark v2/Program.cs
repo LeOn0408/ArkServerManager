@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Quartz.Impl;
-using Quartz;
 using ArkWeb.Models.Server;
 
 namespace web_ark_v2
@@ -18,15 +16,6 @@ namespace web_ark_v2
         public static void Main(string[] args)
         {
 
-            //string osver = Environment.OSVersion.VersionString;
-            //osver = osver.Substring(0, 4);
-            //if (osver == "Unix")
-            //    ServerSettings.ServerPath = "/mnt/data/Projects/ArkServer/arkv3/";
-            //else
-            //    ServerSettings.ServerPath = "P:\\ArkServer\\arkv3\\";
-            //Jobs jobs = new();
-            //Task task = new(() => jobs.GetJobs());
-            //task.Start();
             CreateHostBuilder(args).Build().Run();
             
         }
