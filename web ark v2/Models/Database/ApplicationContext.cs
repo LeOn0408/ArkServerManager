@@ -13,7 +13,7 @@ namespace ArkWeb
         public DbSet<APISetting> APISetting { get; set; }
         public DbSet<ArkFeedbackType> ArkFeedbackTypes { get; set; }
         public DbSet<ArkFeedback> ArkFeedback { get; set; }
-
+        public DbSet<RoadMap> RoadMap { get; set; }
 
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)

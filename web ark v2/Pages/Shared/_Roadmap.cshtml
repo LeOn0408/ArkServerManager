@@ -1,0 +1,29 @@
+﻿@using System.Globalization;
+@inject ApplicationContext db
+@{
+    CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
+    List<RoadMap> roadmap = new();
+    try
+    {
+        foreach (var road in db.RoadMap.ToList().OrderBy(d => d.ReleaseDate))
+        {
+            roadmap.Add(road);
+        }
+    }
+    catch (Exception)
+    {
+        //TODO: Ошибки в логи
+    }
+}
+Планы по развитию:
+<ul>
+    @foreach(var road in roadmap)
+    {
+        @Html.Raw("<li><b>");
+        @road.ReleaseDate.ToString("y",culture)
+        @Html.Raw("</b></br>");
+        @road.Name
+        @Html.Raw("</li>");
+    }
+    
+</ul>
