@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ARKServerManager.Controllers
 {
-    [Route("api/getonlineplayers")]
+    [Route("api/onlineplayers")]
     [ApiController]
     public class OnlinePlayersController : ControllerBase
     {

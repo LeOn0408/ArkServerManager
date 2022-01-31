@@ -32,7 +32,7 @@ namespace ARKServerManager
                        .AddConsole();
             });
 
-            string TypeDB = "MySQL";
+            string TypeDB = "MySQL";//вывести в setting
             if (TypeDB == "MySQL")
             {
                 string connection = Configuration.GetConnectionString("MySQLConnection");
@@ -57,7 +57,7 @@ namespace ARKServerManager
                    options.UseSqlite(connection));
             }
 
-            services.AddHostedService<Jobs>();
+            services.AddHostedService<ServerJob>();
         }
     
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)

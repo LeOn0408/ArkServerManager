@@ -23,7 +23,7 @@ namespace ARKServerManager.Controllers
 
             try
             {
-                RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
+                using RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
                 await rcon.ConnectAsync();
                 string rconReq = await rcon.SendCommandAsync(cmd);
                 return rconReq;
@@ -34,18 +34,18 @@ namespace ARKServerManager.Controllers
                 return "Not connected";
             }
         }
-        public async Task<string> SetRconAsync(string cmd)
+        public async void SetRconAsync(string cmd)
         {
             try
             {
-                RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
+                using RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
                 await rcon.ConnectAsync();
-
-                return "OK";
+                string rconReq = await rcon.SendCommandAsync(cmd);
+             
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                
             }
         }
     }

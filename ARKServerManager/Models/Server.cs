@@ -4,6 +4,8 @@
     {
         public int Id {  get; set; }    
         public string Name {  get; set; }
+        public string PublicName { get; set; }
+        public int MaxPlayers { get; set; }
         public string LocalIP { get; set; }
         public string RemoteIP {  get; set; }
         public int LocalPort { get; set; }

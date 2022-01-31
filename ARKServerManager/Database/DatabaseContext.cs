@@ -11,6 +11,7 @@ namespace ARKServerManager.Database
         public DbSet<Server> Server { get; set; }
         public DbSet<PlayerStatistics> Statistics { get; set; }
         public DbSet<ServerTask> Jobs { get; set; }
+        public DbSet<SteamCMD> SteamCMD { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)

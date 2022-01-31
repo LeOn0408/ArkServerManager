@@ -1,4 +1,4 @@
-﻿using ARKServerManager.ServerService;
+﻿using ARKServerManager.Services;
 
 namespace ARKServerManager
 {
@@ -6,7 +6,9 @@ namespace ARKServerManager
     {
         public static void Main(string[] args)
         {
+            
             CreateHostBuilder(args).Build().Run();
+           
         }
 
 
