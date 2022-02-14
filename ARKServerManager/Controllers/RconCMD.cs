@@ -20,12 +20,14 @@ namespace ARKServerManager.Controllers
 
         public async Task<string> GetRconAsync(string cmd)
         {
-
+            
             try
             {
-                using RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
+
+                RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
                 await rcon.ConnectAsync();
                 string rconReq = await rcon.SendCommandAsync(cmd);
+                //rcon.Dispose();//вылетает исключение
                 return rconReq;
             }
 
