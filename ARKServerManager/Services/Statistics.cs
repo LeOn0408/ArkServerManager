@@ -34,7 +34,7 @@ namespace ARKServerManager.ServerService
                 List<Player> players = server.Players;
                 foreach (Player player in players)
                 {
-                    if(player.Id == "0")
+                    if (player.Id == "0")
                     {
                         continue;
                     }
@@ -58,7 +58,7 @@ namespace ARKServerManager.ServerService
                     }
                     Db.SaveChanges();
                 }
-                
+
             }
         }
     }

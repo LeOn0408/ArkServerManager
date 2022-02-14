@@ -78,7 +78,7 @@ namespace ARKServerManager.Controllers
                     }
                 }
                 serverApi.Players = players;
-                serverApi.RemoteIP=server.RemoteIP;
+                serverApi.RemoteIP = server.RemoteIP;
                 serverApi.RemotePort = server.RemotePort;
                 servers.Add(serverApi);
             }
