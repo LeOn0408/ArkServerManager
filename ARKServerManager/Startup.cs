@@ -56,7 +56,7 @@ namespace ARKServerManager
                 services.AddDbContext<DatabaseContext>(options =>
                    options.UseSqlite(connection));
             }
-
+            services.AddCors();
             services.AddHostedService<ServerJob>();
         }
     
@@ -64,11 +64,15 @@ namespace ARKServerManager
         {
             db.Database.EnsureCreated();
             db.Database.Migrate();
-            
+
             //if (env.IsDevelopment())
             //{
             //    _ = app.UseDeveloperExceptionPage();
             //}
+            //app.UseCors(builder => builder.WithOrigins("https://localhost:7131", "https://aparshukov.ru"));
+            // подключаем CORS
+            app.UseCors(builder => builder.AllowAnyOrigin());
+
             app.UseRouting();
             app.UseEndpoints(endpoints =>endpoints.MapControllers());
 
