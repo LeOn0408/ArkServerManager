@@ -2,10 +2,11 @@
 @inject ApplicationContext db
 @{
     CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
+    
     List<RoadMap> roadmap = new();
     try
-    {
-        foreach (var road in db.RoadMap.ToList().OrderBy(d => d.ReleaseDate))
+    {   var dbRoadmap = db.RoadMap.ToList().OrderBy(d => d.ReleaseDate);
+        foreach (var road in dbRoadmap)
         {
             roadmap.Add(road);
         }

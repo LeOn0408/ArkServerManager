@@ -1,11 +1,15 @@
-﻿@inject ApplicationContext db
+﻿@using System.Net.Http
+@inject ApplicationContext db
 @{
 
     List<ServerApi> servers;
     try
     {
         var api =db.APISetting.Where(x => x.ID == 1).FirstOrDefault().ApiHost;
-        string json = new WebClient().DownloadString(api);
+        HttpClient client = new HttpClient();
+        HttpResponseMessage response = await client.GetAsync(api);
+        //response.EnsureSuccessStatusCode();
+        string json = await response.Content.ReadAsStringAsync();
         servers = JsonConvert.DeserializeObject<List<ServerApi>>(json);
     }
     catch
