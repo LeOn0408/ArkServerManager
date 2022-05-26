@@ -7,9 +7,19 @@ namespace ARKServerManager.ServerService
 
         public Task Backup(Database.DatabaseContext db, int serverId)
         {
-            string ServerPath = db.Server.Where(x=>x.Id==serverId).FirstOrDefault()?.ServerPath;
-            string savepath = ServerPath + "ShooterGame/Saved/SavedArks/";
-            string backuppath = ServerPath + "backup/ARK" + DateTime.Today.ToString("yyyyMMdd") + ".zip";
+            var server  = db.Server.Where(x=>x.Id==serverId).FirstOrDefault();
+            if (server == null)
+            {
+                return Task.CompletedTask;
+            }
+
+            string savepath = Path.Combine(server.ServerPath,server.SaveDataPath);
+            string backupDirectory = Path.Combine(server.ServerPath, "backup");
+            if (!Directory.Exists(backupDirectory))
+            {
+                Directory.CreateDirectory(backupDirectory);
+            }
+            string backuppath = Path.Combine(backupDirectory,$"{server.Name}{DateTime.Today:yyyyMMdd}.zip");
             if (!File.Exists(backuppath))
             {
 

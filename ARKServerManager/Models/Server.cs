@@ -23,6 +23,7 @@
         public ushort RconPort {  get; set; }
         public string RconPass {  get; set; }
         public int Visible { get; set; }
+        public string SaveDataPath { get; set; }
         
     }
 }
