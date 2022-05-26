@@ -1,5 +1,6 @@
 ﻿using ARKServerManager.Controllers;
 using ARKServerManager.Database;
+using ARKServerManager.DataProvider;
 using ARKServerManager.Models;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,7 +12,6 @@ namespace ARKServerManager.ServerService
 {
     public class Statistics
     {
-        readonly DatabaseContext Db;
         private readonly IServiceScopeFactory scopeFactory;
         public Statistics(IServiceScopeFactory _scopeFactory)
         {
@@ -19,25 +19,26 @@ namespace ARKServerManager.ServerService
 
         }
 
-
-        public async void StartStatistics()
+        public void StartStatistics()
         {
             using IServiceScope _scope = scopeFactory.CreateScope();
 
             using var Db = _scope.ServiceProvider.GetRequiredService<DatabaseContext>();
             TimeSpan time = new(0, 1, 0);
-            List<ServerApi> servers = await new OnlinePlayersController(Db).Get();
+            List<ServerApi> servers = new ServersDataProvider(Db).GetServers(); 
             foreach (ServerApi server in servers)
             {
-                if (server.Id < 0) continue;//server.Id<0 это ошибки- . Необходимо прервать
-
+                if (!server.IsConnected)
+                {
+                    continue;
+                }
                 List<Player> players = server.Players;
+                if(players is null)
+                {
+                    continue;
+                }
                 foreach (Player player in players)
                 {
-                    if (player.Id == "0")
-                    {
-                        continue;
-                    }
                     PlayerStatistics ps = Db.Statistics.FirstOrDefault(x => x.PlayerId == player.Id && x.ServerId == server.Id);
                     if (ps == null)
                     {

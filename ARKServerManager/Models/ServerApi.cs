@@ -21,5 +21,8 @@ namespace ARKServerManager.Models
         public string RemoteIP {  get; set; }
         public int RemotePort { get; set; }
 
+        public bool IsConnected { get; set; }
+        public string Result { get; set; }
+
     }
 }

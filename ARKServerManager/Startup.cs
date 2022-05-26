@@ -23,6 +23,7 @@ namespace ARKServerManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddLogging(
             builder =>
             {
@@ -46,7 +47,7 @@ namespace ARKServerManager
                         maxRetryDelay: TimeSpan.FromSeconds(5),
                         errorNumbersToAdd: null);
                     }));
-                
+
             }
             else
             {
@@ -58,17 +59,18 @@ namespace ARKServerManager
             }
             services.AddCors();
             services.AddHostedService<ServerJob>();
+            //Console.WriteLine(Configuration.GetConnectionString("MySQLConnection"));
         }
     
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
         {
             db.Database.EnsureCreated();
             db.Database.Migrate();
 
-            //if (env.IsDevelopment())
-            //{
-            //    _ = app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                _ = app.UseDeveloperExceptionPage();
+            }
             //app.UseCors(builder => builder.WithOrigins("https://localhost:7131", "https://aparshukov.ru"));
             // подключаем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());

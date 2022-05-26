@@ -13,7 +13,6 @@ namespace ARKServerManager.ServerService
     }
     public class ServerJob:IHostedService
     {
-        private List<int> process=new();
         private readonly IServiceScopeFactory scopeFactory;
         private readonly ILogger<ServerJob> logger;
         
@@ -31,7 +30,7 @@ namespace ARKServerManager.ServerService
         public Task StartAsync(CancellationToken cancellationToken)
         {
             string message = $"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Background tasks started";
-            logger.LogInformation(message);
+            //logger.LogInformation(message);
             timer = new(GetJobs, null, 0, 60000);
             
             return Task.CompletedTask;
@@ -62,7 +61,8 @@ namespace ARKServerManager.ServerService
             }
             catch (Exception ex)
             {
-                logger.LogInformation(ex.Message);
+
+                logger.LogError(ex,"Ошибка");
             }
             
         }
@@ -90,7 +90,7 @@ namespace ARKServerManager.ServerService
             {
                 switch (c.Type)
                 {
-                    case 1: 
+                    case 1:
                         Backup(Db, c);
                         break;
                     case 2:
@@ -102,48 +102,23 @@ namespace ARKServerManager.ServerService
             }
             catch (Exception ex)
             {
-                logger.LogError($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} {ex.Message}");
+                logger.LogError(ex, "Ошибка");
             }
             
 
         }
-        private async void Update(DatabaseContext Db, ServerTask edit)
+       
+        private static void Backup(DatabaseContext Db, ServerTask edit)
         {
-            logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Update started");
-            Server server = Db.Server.FirstOrDefault(s => s.Id == edit.ServerId);
-            ArkServer ark = new();
-
-            await ark.Save(server);
-            //StopChildrenProcess();//ркон не всегда корректно срабатывает. Принудительно закрываем все ранее запущенные приложения, хотя лучше использовать коммнду quit
-            
-            await ark.UpdateAsync(logger);
-            process.Add(ark.Launch(server));
-            logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Update completed");
-            
-        }
-        private void Backup(DatabaseContext Db, ServerTask edit)
-        {
-            logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Backup started");
+            //logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Backup started");
             BackupSave backupSave = new();
             backupSave.Backup(Db, edit.ServerId);
-            logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Backup completed");
+            //logger.LogInformation($"{DateTime.Now:yyyy.MM.dd HH:mm:ss} Backup completed");
             
         }
 
-        //void StopChildrenProcess()
-        //{
-        //    foreach (var item in process)
-        //    {
-        //        var proc = Process.GetProcessById(item);
-        //        proc.Kill(true);
-        //        process.Remove(item);
-        //    }
-
-        //    //TODO: Добавить очистку всех серверов, которые не контролируются нами. Или выдать предупреждение что обнаружены не закрытые сервера
-        //}
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            //StopChildrenProcess();
             timer.Dispose();
             return Task.CompletedTask;
         }

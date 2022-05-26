@@ -18,10 +18,5 @@ namespace ARKServerManager.ServerService
             return Task.CompletedTask;
         }
 
-        public static async void Restore()
-        {
-
-
-        }
     }
 }

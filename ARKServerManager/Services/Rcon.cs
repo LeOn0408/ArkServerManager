@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ARKServerManager.Controllers
 {
-    public class RconCMD
+    public class Rcon
     {
-        public RconCMD(string ip, string pass, ushort port)
+        public Rcon(string ip, string pass, ushort port)
         {
             Ip = ip;
             Pass = pass;
@@ -27,13 +27,12 @@ namespace ARKServerManager.Controllers
                 RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
                 await rcon.ConnectAsync();
                 string rconReq = await rcon.SendCommandAsync(cmd);
-                //rcon.Dispose();//вылетает исключение
                 return rconReq;
             }
 
             catch (Exception)
             {
-                return "Not connected";
+                throw new Exception("Not connect");
             }
         }
         public async void SetRconAsync(string cmd)
@@ -45,7 +44,7 @@ namespace ARKServerManager.Controllers
                 string rconReq = await rcon.SendCommandAsync(cmd);
              
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
             }
