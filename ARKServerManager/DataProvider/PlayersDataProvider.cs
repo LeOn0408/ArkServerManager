@@ -20,7 +20,8 @@ namespace ARKServerManager.DataProvider
             Players = new();
             try
             {
-                string rconCMD = new Rcon(_server.LocalIP, _server.RconPass, _server.RconPort).GetRconAsync("listplayers").Result;
+                string command = new ServerCommand(_server.TypeServer).GetPlayers;
+                string rconCMD = new Rcon(_server.LocalIP, _server.RconPass, _server.RconPort).GetRconAsync(command).Result;
                 if (rconCMD is not "No Players Connected")
                 {
                     rconCMD = rconCMD.Remove(0, 2);

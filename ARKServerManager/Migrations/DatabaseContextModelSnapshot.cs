@@ -90,6 +90,9 @@ namespace ARKServerManager.Migrations
                     b.Property<string>("ServerPath")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("TypeServer")
+                        .HasColumnType("int");
+
                     b.Property<string>("Version")
                         .HasColumnType("longtext");
 

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ARKServerManager.DataProvider
 {
-    public class ServersDataProvider
+    public class ServerDataProvider
     {
         private readonly DatabaseContext _db;
 
-        public ServersDataProvider(DatabaseContext db)
+        public ServerDataProvider(DatabaseContext db)
         {
             _db = db;
         }
@@ -23,19 +23,30 @@ namespace ARKServerManager.DataProvider
                 {
                     continue;
                 }
-                ServerApi serverApi = new();
-                serverApi.Id = server.Id;
-                serverApi.RemoteIP = server.RemoteIP;
-                serverApi.RemotePort = server.RemotePort;
+                ServerApi serverApi = new()
+                {
+                    Id = server.Id,
+                    RemoteIP = server.RemoteIP,
+                    RemotePort = server.RemotePort
+                };
 
 
                 try
                 {
-                    Server serverInformation = GetServersInformation(server);
+                    serverApi.Players = new PlayersDataProvider(server).Players;
+                    Server serverInformation;
+                    switch (server.TypeServer)
+                    {
+                        case GameServer.Ark: serverInformation = GetServerArkInformation(server);
+                            break;
+
+                        default: throw new Exception("Server id unknown");
+                    }
+                    
+
                     serverApi.Name = serverInformation.Name;
                     serverApi.Version = serverInformation.Version;
                     serverApi.Map = serverInformation.Map;
-                    serverApi.Players = new PlayersDataProvider(server).Players;
                     serverApi.IsConnected = true;
                     servers.Add(serverApi);
                 }
@@ -51,7 +62,7 @@ namespace ARKServerManager.DataProvider
             }
             return servers;
         }
-        private static Server GetServersInformation(Server serverdata)
+        private static Server GetServerArkInformation(Server serverdata)
         {
             dynamic server = A2S.Server.Query(serverdata.LocalIP, serverdata.LocalPort, 5);
             Server serverInfo = new();
