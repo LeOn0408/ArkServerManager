@@ -43,6 +43,7 @@
         
         public string RconPass {  get; set; }
         
+        //TODO: Переделать на bool 
         public int Visible { get; set; }
         
         public string SaveDataPath { get; set; }
