@@ -69,11 +69,11 @@ namespace ARKServerManager.Servers
         {
             using IServiceScope scope = _scopeFactory.CreateScope();
             using var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-            Server server = db.Server.FirstOrDefault(s => s.Id == (int)GameServer.Ark);
-            if(server is not null)
+            var servers = db.Server.Where(s => s.TypeServer == GameServer.Ark);
+            foreach(var server in servers)
             {
-                new ArkLogs(server,db).ReadFileLog();
-            }
+                new ArkLogs(server, db).ReadFileLog();
+            }           
         }
 
         private void CreateStatisticJob()
