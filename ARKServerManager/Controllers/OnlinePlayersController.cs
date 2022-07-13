@@ -20,7 +20,7 @@ namespace ARKServerManager.Controllers
         [Produces("application/json")]
         public List<ServerApi> Get()
         {
-            return new ServersDataProvider(Db).GetServers();
+            return new ServerDataProvider(Db).GetServers();
         }
     }
 }

@@ -36,15 +36,19 @@
 
   <ItemGroup>
     <PackageReference Include="A2S" Version="1.0.2" />
-    <PackageReference Include="CoreRCON" Version="5.0.2" />
+    <PackageReference Include="CoreRCON" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Server\" />
+    <Folder Include="Servers\Ark\" />
   </ItemGroup>
 
 </Project>

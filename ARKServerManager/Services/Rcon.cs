@@ -1,7 +1,5 @@
 ﻿using CoreRCON;
-using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace ARKServerManager.Controllers
 {
