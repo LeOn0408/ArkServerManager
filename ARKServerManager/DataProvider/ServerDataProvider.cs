@@ -40,7 +40,7 @@ namespace ARKServerManager.DataProvider
                         case GameServer.Ark: serverInformation = GetServerArkInformation(server);
                             break;
 
-                        default: throw new Exception("Server id unknown");
+                        default: continue;
                     }
                     
 
