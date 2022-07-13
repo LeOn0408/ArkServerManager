@@ -25,7 +25,7 @@ namespace ARKServerManager.ServerService
 
             using var Db = _scope.ServiceProvider.GetRequiredService<DatabaseContext>();
             TimeSpan time = new(0, 1, 0);
-            List<ServerApi> servers = new ServersDataProvider(Db).GetServers(); 
+            List<ServerApi> servers = new ServerDataProvider(Db).GetServers(); 
             foreach (ServerApi server in servers)
             {
                 if (!server.IsConnected)

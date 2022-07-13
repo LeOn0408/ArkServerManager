@@ -22,8 +22,6 @@ namespace ARKServerManager
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddLogging(
             builder =>
             {
@@ -59,7 +57,9 @@ namespace ARKServerManager
             }
             services.AddCors();
             services.AddHostedService<ServerJob>();
-            //Console.WriteLine(Configuration.GetConnectionString("MySQLConnection"));
+            services.AddControllersWithViews();
+
+
         }
     
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
@@ -75,8 +75,12 @@ namespace ARKServerManager
             // подключаем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
-            app.UseEndpoints(endpoints =>endpoints.MapControllers());
+            app.UseEndpoints(endpoints =>endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"));
 
 
         }
