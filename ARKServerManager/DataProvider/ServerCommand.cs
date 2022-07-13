@@ -16,7 +16,8 @@ namespace ARKServerManager.DataProvider
                 case GameServer.Minecraft:
                     CreateCommandMinecraft();
                     break;
-                default: throw new Exception("Server id unknown");
+                default: 
+                    break;
             }
         }
 
