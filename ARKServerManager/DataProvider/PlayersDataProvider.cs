@@ -1,5 +1,5 @@
-﻿using ARKServerManager.Controllers;
-using ARKServerManager.Models;
+﻿using ARKServerManager.Models;
+using ARKServerManager.Services;
 
 namespace ARKServerManager.DataProvider
 {
