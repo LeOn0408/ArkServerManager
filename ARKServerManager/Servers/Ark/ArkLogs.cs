@@ -1,4 +1,5 @@
 ﻿using ARKServerManager.Controllers;
+using ARKServerManager.Database;
 using ARKServerManager.DataProvider;
 using ARKServerManager.Models;
 using ARKServerManager.Models.Ark;
@@ -11,10 +12,12 @@ namespace ARKServerManager.Servers.Ark
     public class ArkLogs
     {
         private readonly Server _server;
+        private readonly DatabaseContext _db;
 
-        public ArkLogs(Server server)
+        public ArkLogs(Server server, DatabaseContext db)
         {
             _server = server;
+            _db = db;
         }
 
         /// <summary>
@@ -23,15 +26,23 @@ namespace ARKServerManager.Servers.Ark
         /// <exception cref="Exception"></exception>
         public void ReadFileLog()
         {
-            string logPath = Path.Combine(_server.ServerPath, @"ShooterGame\Saved\Logs");
+            string logPath = Path.Combine(_server.ServerPath, @"ShooterGame/Saved/Logs");
             if (File.Exists(logPath))
             {
                 throw new Exception($"Error log path: {logPath}");
             }
-            ParserLog(File.ReadAllLines(Path.Combine(logPath,"ServerGame.211179.2022.07.01_07.48.01.log")));
+            foreach(var log in Directory.GetFiles(logPath))
+            {
+                if (log.Contains("ServerGame"))
+                {
+                    ParserLog(File.ReadAllLines(log));
+                } 
+            }
+            
         }
         private void ParserLog(string[] logfile)
         {
+            var ArkLogRows = _db.ArkLogRows;
             foreach (string line in logfile)
             {
                 ArkLogRow arkLog = new();
@@ -48,10 +59,17 @@ namespace ARKServerManager.Servers.Ark
                 arkLog.Date = (DateTime)logDate;
                 arkLog.RecordID = recordID;
                 arkLog.RecordRow = GetRecordRow(line);
+                arkLog.ServerID = _server.Id;
+                var arkRow = ArkLogRows.FirstOrDefault(a => a.Date == arkLog.Date && a.RecordID == arkLog.RecordID);
+                if(arkRow == null)
+                {
+                    ArkLogRows.Add(arkLog);
+                }
             }
+            _db.SaveChanges();
         }
 
-        private string GetRecordRow(string line)
+        private static string GetRecordRow(string line)
         {
             MatchCollection matchData = Regex.Matches(line, new string(@"_[0-2][0-9].[0-6][0-9].[0-6][0-9]\:"));
             if(matchData.Count == 0)
@@ -86,7 +104,7 @@ namespace ARKServerManager.Servers.Ark
                 return null;
             }
             CultureInfo provider = CultureInfo.InvariantCulture;
-            return DateTime.ParseExact(matchData[0].Value, "yyyy.MM.dd_hh.mm.ss", provider);
+            return DateTime.ParseExact(matchData[0].Value, "yyyy.MM.dd_HH.mm.ss", provider);
         }
 
         /// <summary>

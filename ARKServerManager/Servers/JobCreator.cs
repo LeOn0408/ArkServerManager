@@ -72,7 +72,7 @@ namespace ARKServerManager.Servers
             Server server = db.Server.FirstOrDefault(s => s.Id == (int)GameServer.Ark);
             if(server is not null)
             {
-                new ArkLogs(server).ReadFileLog();
+                new ArkLogs(server,db).ReadFileLog();
             }
         }
 
