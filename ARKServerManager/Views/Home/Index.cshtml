@@ -1,0 +1,29 @@
+﻿@using ARKServerManager.Models
+@model IEnumerable<Server>
+@{
+    ViewBag.Title = "Сервера";
+
+}
+<h3>Сервера</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Название</td>
+            <td>Отображаемое название</td>
+            <td>Карта</td>
+            <td>Статус</td>
+        </tr>
+         @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.PublicName</td>
+                <td>@p.Map</td>
+                <td>Отключен</td>
+                <td><input type="button" value="настроить"/></td>
+                <td><input type="button" value="запустить"/></td>
+            </tr>
+        }
+        <tr><td><input type="button" value="add"/></td></tr>
+    </tbody>
+</table>

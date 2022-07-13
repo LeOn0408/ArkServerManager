@@ -1,5 +1,4 @@
 ﻿
-
 namespace ARKServerManager
 {
     public class Program
@@ -16,7 +15,7 @@ namespace ARKServerManager
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://*:5005").UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }
