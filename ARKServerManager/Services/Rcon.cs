@@ -1,7 +1,7 @@
 ﻿using CoreRCON;
 using System.Net;
 
-namespace ARKServerManager.Controllers
+namespace ARKServerManager.Services
 {
     public class Rcon
     {
@@ -18,7 +18,7 @@ namespace ARKServerManager.Controllers
 
         public async Task<string> GetRconAsync(string cmd)
         {
-            
+
             try
             {
 
@@ -40,11 +40,11 @@ namespace ARKServerManager.Controllers
                 using RCON rcon = new(IPAddress.Parse(Ip), Port, Pass);
                 await rcon.ConnectAsync();
                 string rconReq = await rcon.SendCommandAsync(cmd);
-             
+
             }
             catch (Exception)
             {
-                
+
             }
         }
     }

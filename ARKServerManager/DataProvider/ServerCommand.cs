@@ -5,6 +5,7 @@ namespace ARKServerManager.DataProvider
     public record ServerCommand
     {
         public string GetPlayers { get; private set; }
+        public string GetLog { get; private set; }
 
         public ServerCommand(GameServer typeServer)
         {
@@ -24,6 +25,7 @@ namespace ARKServerManager.DataProvider
         private void CreateCommandMinecraft()
         {
             GetPlayers = "players";
+            GetLog = "GetGameLog";
         }
 
         private void CreateCommandArk()

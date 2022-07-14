@@ -1,5 +1,6 @@
 ﻿using ARKServerManager.Database;
 using ARKServerManager.Models;
+using ARKServerManager.Servers.Ark;
 using ARKServerManager.ServerService;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,8 +34,8 @@ namespace ARKServerManager.Servers
             using var Db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
             try
             {
-                Statistics statistics = new(_scopeFactory);
-                statistics.StartStatistics();
+                CreateWorkWithoutDates();
+
 
                 Tasks = Db.Jobs.Where(x => x.Result == 0).AsNoTracking().ToList();
                 foreach (ServerTask c in Tasks)
@@ -58,7 +59,29 @@ namespace ARKServerManager.Servers
             }
 
         }
-        void JobsCreated(ServerTask c)
+        private void CreateWorkWithoutDates()
+        {
+            CreateStatisticJob();
+            CreateArkJob();
+        }
+
+        private void CreateArkJob()
+        {
+            using IServiceScope scope = _scopeFactory.CreateScope();
+            using var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            var servers = db.Server.Where(s => s.TypeServer == GameServer.Ark);
+            foreach(var server in servers)
+            {
+                new ArkLogs(server, db).ReadFileLog();
+            }           
+        }
+
+        private void CreateStatisticJob()
+        {
+            Statistics statistics = new(_scopeFactory);
+            statistics.StartStatistics();
+        }
+        private void JobsCreated(ServerTask c)
         {
             using IServiceScope scope = _scopeFactory.CreateScope();
             using var Db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
