@@ -57,9 +57,9 @@ namespace ARKServerManager
             }
             services.AddCors();
             services.AddHostedService<ServerJob>();
-            services.AddControllersWithViews();
-
-
+            services.AddControllers();
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
         }
     
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
@@ -71,18 +71,16 @@ namespace ARKServerManager
             {
                 _ = app.UseDeveloperExceptionPage();
             }
-            //app.UseCors(builder => builder.WithOrigins("https://localhost:7131", "https://aparshukov.ru"));
-            // подключаем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseEndpoints(endpoints =>endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"));
-
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/Index");
+            });
         }
     }
 

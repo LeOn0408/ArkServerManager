@@ -5,9 +5,7 @@ namespace ARKServerManager
     {
         public static void Main(string[] args)
         {
-            
             CreateHostBuilder(args).Build().Run();
-           
         }
 
 
@@ -16,6 +14,7 @@ namespace ARKServerManager
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                   
                 });
     }
 }
