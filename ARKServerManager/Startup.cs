@@ -36,7 +36,7 @@ namespace ARKServerManager
             {
                 string connection = Configuration.GetConnectionString("MySQLConnection");
                 ServerVersion vesrion = ServerVersion.AutoDetect(connection);
-                services.AddDbContext<DatabaseContext>(options =>
+                services.AddDbContextFactory<DatabaseContext>(options =>
                     options.UseMySql(connection, vesrion,
                     mySqlOptions =>
                     {
@@ -78,6 +78,7 @@ namespace ARKServerManager
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/Index");
             });
