@@ -35,15 +35,30 @@ namespace ARKServerManager.Servers.Ark
             {
                 if (log.Contains("ServerGame"))
                 {
-                    ParserLog(File.ReadAllLines(log));
+                    try
+                    {
+                        //TODO: Сервер арк блокирует последний файл на чтение. Решить данную проблему
+                        //using StreamReader sr = new(File.OpenRead(log));
+                        //string data = sr.ReadToEnd();
+                        //ParserLog(data.Split("\r\n"));
+                        ParserLog(File.ReadLines(log));
+                    }
+                    catch (IOException)
+                    {
+                        
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 } 
             }
             
         }
-        private void ParserLog(string[] logfile)
+        private void ParserLog(IEnumerable<string> logFileRows)
         {
             var ArkLogRows = _db.ArkLogRows;
-            foreach (string line in logfile)
+            foreach (string line in logFileRows)
             {
                 ArkLogRow arkLog = new();
                 DateTime? logDate = GetLogDate(line);
