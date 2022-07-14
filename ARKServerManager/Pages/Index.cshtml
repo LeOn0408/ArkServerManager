@@ -1,8 +1,8 @@
-﻿@using ARKServerManager.Models
-@model IEnumerable<Server>
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@namespace ARKServerManager.Pages
+@model IndexModel;
 @{
-    ViewBag.Title = "Сервера";
-
 }
 <h3>Сервера</h3>
 <table>
@@ -13,7 +13,7 @@
             <td>Карта</td>
             <td>Статус</td>
         </tr>
-         @foreach (var p in Model)
+        @foreach (var p in @Model.Servers)
         {
             <tr>
                 <td>@p.Name</td>
@@ -27,3 +27,11 @@
         <tr><td><input type="button" value="add"/></td></tr>
     </tbody>
 </table>
+<div id="admin-log">
+    <h2>Консоль администратора</h2>
+    <div id="chat-window">
+        <component type="typeof(Components.AdminLog)" render-mode="ServerPrerendered" />
+    </div>
+    <input />
+    <input type="button" value="отправить" />
+</div>
