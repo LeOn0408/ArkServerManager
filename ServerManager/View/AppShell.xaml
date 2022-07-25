@@ -6,20 +6,16 @@
     xmlns:local="clr-namespace:ServerManager.View"
     xmlns:vm="clr-namespace:ServerManager.ViewModel"
     Title="Server Manager">
-
     <Shell.BindingContext>
         <vm:AppShellViewModel></vm:AppShellViewModel>
     </Shell.BindingContext>
-    <TabBar Title="Выберите сервер">
-        <Tab Title="Ark">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:ArkPage}"/>
-        </Tab>
-        <Tab Title="Minecraft">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:MinecraftPage}" />
-        </Tab>
-    </TabBar>
     
-
+    <ShellContent Title="Ark"
+                        ContentTemplate="{DataTemplate local:ArkPage }"/>
+        
+        
+    <ShellContent Title="Minecraft"
+                    ContentTemplate="{DataTemplate local:MinecraftPage}" />
+        
+    
 </Shell>

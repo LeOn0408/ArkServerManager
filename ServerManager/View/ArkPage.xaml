@@ -7,26 +7,19 @@
     <ContentPage.BindingContext>
         <local:ArkPageViewModel />
     </ContentPage.BindingContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Picker Title="Выберите сервер" Grid.Row="0" Grid.Column="0">
-            
-        </Picker>
-        <Label Grid.Row="0" Grid.Column="2">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text=" Публичный адрес: " />
-                    <Span Text="{Binding IP, Mode=TwoWay}" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </Grid>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Label
+                Text="{Binding Test}"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

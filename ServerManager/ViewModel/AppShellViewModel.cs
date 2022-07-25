@@ -1,5 +1,4 @@
-﻿using ServerManager.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +8,12 @@ namespace ServerManager.ViewModel
 {
     internal class AppShellViewModel:ViewModelBase
     {
-        internal List<ServerShellInfo> AppShellList;
-        
+        public string Ark { get; set; }
+        public string Minecraft { get; set; }
         public AppShellViewModel()
         {
-            AppShellList = new List<ServerShellInfo>() { new ServerShellInfo() {Name = "Ark" } };
+            Ark = "Ark Server Launcher";
+            Minecraft = "Minecraft Server Launcher";
         }
     }
 }
