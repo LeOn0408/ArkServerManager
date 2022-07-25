@@ -1,32 +1,11 @@
 ﻿@page
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @namespace ARKServerManager.Pages
-@model IndexModel;
 @{
 }
-<h3>Сервера</h3>
-<table>
-    <tbody>
-        <tr>
-            <td>Название</td>
-            <td>Отображаемое название</td>
-            <td>Карта</td>
-            <td>Статус</td>
-        </tr>
-        @foreach (var p in @Model.Servers)
-        {
-            <tr>
-                <td>@p.Name</td>
-                <td>@p.PublicName</td>
-                <td>@p.Map</td>
-                <td>Отключен</td>
-                <td><input type="button" value="настроить"/></td>
-                <td><input type="button" value="запустить"/></td>
-            </tr>
-        }
-        <tr><td><input type="button" value="add"/></td></tr>
-    </tbody>
-</table>
+<div>
+    <component type="typeof(Components.ServersList)" render-mode="ServerPrerendered" />
+</div>
 <div id="admin-log">
     <component type="typeof(Components.AdminLog)" render-mode="ServerPrerendered" />
 </div>
