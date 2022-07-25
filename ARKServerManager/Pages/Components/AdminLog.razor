@@ -1,5 +1,33 @@
-﻿
+﻿@using ARKServerManager.Database
+@using ARKServerManager.Models
+@using ARKServerManager.Models.Ark
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<DatabaseContext> DbContextFactory
+
+<h2>Консоль администратора</h2>
+<select>
+    @foreach (var item in servers)
+    {
+        <option>@item.Name</option>
+    }
+</select>
+<div id="chat-window">
+    @foreach (var row in logRows)
+    {
+        <p>@row.Date.ToString("dd-MM-yy HH:mm"): @row.RecordRow</p>
+    }
+</div>
+<input />
+<input type="button" value="отправить" />
 
 @code {
-    
+    private List<ArkLogRow> logRows = new();
+    private List<Server> servers = new();
+    DatabaseContext _db;
+    protected override async Task OnInitializedAsync()
+    {
+        _db = DbContextFactory.CreateDbContext();
+        logRows = await _db.ArkLogRows.OrderByDescending(l => l.Date).ToListAsync();
+        servers = await _db.Server.ToListAsync();
+    }
 }
