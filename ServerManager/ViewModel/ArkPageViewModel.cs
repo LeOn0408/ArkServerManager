@@ -10,10 +10,26 @@ namespace ServerManager.ViewModel
 {
     internal class ArkPageViewModel : ViewModelBase
     {
-        public string Test { get; set; } = "Ark";
+        private string ip;
+
+        public string IP
+        {
+            get => ip;
+            set
+            {
+                ip = value;
+                OnPropertyChanged(nameof(IP));
+            }
+        }
+
+
         public ArkPageViewModel()
         {
-
+            Launch();
+        }
+        async void Launch()
+        {
+            IP = await Services.IP.Get();
         }
 
     }
