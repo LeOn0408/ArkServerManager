@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerManagerSE", "ARKServerManager\ServerManagerSE.csproj", "{BA5EF935-DC4B-4F5C-9C75-3DC7CBC82DEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerManager", "ServerManager\ServerManager.csproj", "{0B72C65C-9021-4755-B81E-E6EE36675965}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{BA5EF935-DC4B-4F5C-9C75-3DC7CBC82DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA5EF935-DC4B-4F5C-9C75-3DC7CBC82DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA5EF935-DC4B-4F5C-9C75-3DC7CBC82DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B72C65C-9021-4755-B81E-E6EE36675965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B72C65C-9021-4755-B81E-E6EE36675965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B72C65C-9021-4755-B81E-E6EE36675965}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0B72C65C-9021-4755-B81E-E6EE36675965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B72C65C-9021-4755-B81E-E6EE36675965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B72C65C-9021-4755-B81E-E6EE36675965}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

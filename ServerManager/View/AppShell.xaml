@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ServerManager.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ServerManager"
+    xmlns:vm="clr-namespace:ServerManager.ViewModel"
+    Shell.FlyoutBehavior="Disabled">
+
+    <Shell.BindingContext>
+        <vm:AppShellViewModel></vm:AppShellViewModel>
+    </Shell.BindingContext>
+    
+    <ShellContent
+        Title="{Binding Title}"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>
