@@ -31,6 +31,5 @@ namespace ServerManager.ViewModel
         {
             IP = await Services.IP.Get();
         }
-
     }
 }
