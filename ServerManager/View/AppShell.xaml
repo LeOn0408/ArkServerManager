@@ -3,17 +3,23 @@
     x:Class="ServerManager.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ServerManager"
+    xmlns:local="clr-namespace:ServerManager.View"
     xmlns:vm="clr-namespace:ServerManager.ViewModel"
-    Shell.FlyoutBehavior="Disabled">
+    Title="Server Manager">
 
     <Shell.BindingContext>
         <vm:AppShellViewModel></vm:AppShellViewModel>
     </Shell.BindingContext>
+    <TabBar Title="Выберите сервер">
+        <Tab Title="Ark">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:ArkPage}"/>
+        </Tab>
+        <Tab Title="Minecraft">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MinecraftPage}" />
+        </Tab>
+    </TabBar>
     
-    <ShellContent
-        Title="{Binding Title}"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
 
 </Shell>

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ServerManager.ViewModel
 {
-    internal class MainPageViewModel : ViewModelBase
+    internal class ArkPageViewModel : ViewModelBase
     {
-        public string Test { get; set; } = "ntcn";
-        public MainPageViewModel()
+        public string Test { get; set; } = "Ark";
+        public ArkPageViewModel()
         {
 
         }

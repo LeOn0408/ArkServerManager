@@ -8,10 +8,12 @@ namespace ServerManager.ViewModel
 {
     internal class AppShellViewModel:ViewModelBase
     {
-        public string Title { get; set; }
+        public string Ark { get; set; }
+        public string Minecraft { get; set; }
         public AppShellViewModel()
         {
-            Title = "Ark";
+            Ark = "Ark Server Launcher";
+            Minecraft = "Minecraft Server Launcher";
         }
     }
 }
