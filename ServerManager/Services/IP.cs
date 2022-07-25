@@ -8,9 +8,12 @@ namespace ServerManager.Services
 {
     internal class IP
     {
-        private static string iPAddress;
-
-        internal static string IPAddress { get => iPAddress; set => iPAddress = "1.1.1.1"; }
+        public static async Task<string> Get()
+        {
+            using HttpClient client = new();
+            HttpResponseMessage response = await client.GetAsync("https://www.trackip.net/ip");
+            return await response.Content.ReadAsStringAsync();
+        }
 
     }
 }
